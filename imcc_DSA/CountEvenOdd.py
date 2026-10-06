@@ -1,0 +1,7 @@
+n=int(input("enter N:"))
+arr=list(map(int,input("enter numbers:").split()))
+arr.sort()
+print("largest  number:",arr[-1])
+print("second largest  number:",arr[-2])
+print("smallest  number:",arr[0])
+print("second  number:",arr[1])
