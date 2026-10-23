@@ -1,0 +1,46 @@
+class Node:
+    def __init__(self, val=None):
+        self.val = val
+        self.next = None
+
+class Stack:
+    def __init__(self):
+        self.top = None
+
+    def is_empty(self):
+        return self.top is None
+
+    def push(self, new_node):
+        new_node.next = self.top
+        self.top = new_node
+
+    def pop(self):
+        if self.is_empty():
+            print("Stack is empty")
+        else:
+            temp = self.top
+            print("Popped element:", temp.val)
+            self.top = self.top.next
+            temp = None
+
+    def print_stack(self):
+        temp = self.top
+        while temp:
+            print(temp.val, end=" -> ")
+            temp = temp.next
+        print("None")
+
+    
+
+st = Stack()
+st.push(Node(10))
+st.push(Node(100))
+st.push(Node())
+
+print("Current Stack:")
+st.print_stack()
+
+st.pop()
+
+print("Stack after popping:")
+st.print_stack()
