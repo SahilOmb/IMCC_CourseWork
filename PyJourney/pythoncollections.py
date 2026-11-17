@@ -1,4 +1,4 @@
-'''
+
 #list
 fruits = ["apple","orange","banana","coconut"]
 print(fruits[::-1])
@@ -12,8 +12,7 @@ print(fruits)
 print(fruits.count("banana"))
 for fruit in fruits:
   print(fruit)
-'''
-'''
+
 #set
 fruits = {"apple","orange","banana","coconut","apple"}
 print(len(fruits))
@@ -21,7 +20,7 @@ fruits.add("pizza")
 fruits.remove("pizza")
 fruits.pop()
 print(fruits)
- '''
+
 
 #tuple
 fruits = ("apple","orange","banana","coconut")
