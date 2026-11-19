@@ -35,7 +35,18 @@ class PriorityQueue:
             self.front=self.front.next
         else:
             print("queue is empty")
-            
+
+    def reverse(self):
+        prev = None
+        current = self.front
+        self.rear = self.front
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        self.front = prev
+
     def display(self):
         temp=self.front
         while temp:
@@ -43,14 +54,20 @@ class PriorityQueue:
             temp=temp.next
         print()
 
-#create priority queue
 pq=PriorityQueue()
 pq.enqueue(node(100,2))
 pq.enqueue(node(500,6))
 pq.enqueue(node(300,3))
 pq.enqueue(node(600,1))
 pq.enqueue(node(700,7))
+
+
 pq.display()
+
+pq.reverse()
+
+pq.display()
+
 pq.dequeue()
 pq.dequeue()
 pq.dequeue()
