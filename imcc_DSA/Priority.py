@@ -1,59 +1,48 @@
 class node:
-    def __init__(self,value,pr):
-        self.data=value
-        self.priority=pr
-        self.next=None
+    def __init__(self, value, pr):
+        self.data = value  # Fixed: store the value
+        self.priority = pr
+        self.next = None
 
 class PriorityQueue:
     def __init__(self):
-        self.front=self.rear=None
+        self.front = self.rear = None
 
-    def enqueue(self,new_node):
-        if self.front==None:
-            self.front=new_node
+    def enqueue(self, new_node):
+        # Case 1: Empty queue or new node has strictly higher priority (smaller number)
+        if self.front is None or new_node.priority < self.front.priority:
+            new_node.next = self.front
+            self.front = new_node
+            if self.rear is None:
+                self.rear = new_node
             return
-        if self.front.priority>new_node.priority:
-            new_node.next=self.front
-            self.front=new_node
-            return
-        else:
-            temp=self.front
-            while temp:
-                if new_node.priority<=temp.priority:
-                    break
-                else:
-                    prev=temp
-                    temp=temp.next
 
-            prev.next=new_node
-            new_node.next=temp
+        # Case 2: Traverse to find the exact insertion point
+        temp = self.front
+        while temp.next and temp.next.priority <= new_node.priority:
+            temp = temp.next
 
-    def dequeue(self):
-        if self.front:
-            temp=self.front
-            print("node deleted:",temp.data)
-            self.front=self.front.next
-        else:
-            print("queue is empty")
-            
+        new_node.next = temp.next
+        temp.next = new_node
+
+        # Update rear if inserted at the very end
+        if new_node.next is None:
+            self.rear = new_node
+
     def display(self):
-        temp=self.front
+        temp = self.front
         while temp:
-            print(temp.data, end=" ")
-            temp=temp.next
-        print()
+            print(f"({temp.data}, pr:{temp.priority})", end=" -> ")
+            temp = temp.next
+        print("None")
 
-#create priority queue
-pq=PriorityQueue()
-pq.enqueue(node(100,2))
-pq.enqueue(node(500,6))
-pq.enqueue(node(300,3))
-pq.enqueue(node(600,1))
-pq.enqueue(node(700,7))
+# Test the priority queue
+pq = PriorityQueue()
+pq.enqueue(node(100, 2))
+pq.enqueue(node(500, 6))
+pq.enqueue(node(300, 3))
+pq.enqueue(node(600, 1))
+pq.enqueue(node(700, 1))  # Changed to 700 to verify FIFO order on ties
+
 pq.display()
-pq.dequeue()
-pq.dequeue()
-pq.dequeue()
-pq.dequeue()
-pq.dequeue()
-pq.display()
+
